@@ -9,19 +9,25 @@ const PROTOCOL = {
 }
 
 // Map of instruments and their sound
-const instrumentSound = new Map([
-   ['piano', 'ti-ta-ti'],
-   ['trumpet', 'pouet'],
-   ['flute', 'trulu'],
-   ['violin', 'gzi-gzi'],
-   ['drum', 'boum-boum'],
-]);
+const instrumentSound = {
+	piano: 'ti-ta-ti',
+	trumpet: 'pouet',
+	flute: 'trulu',
+	violin: 'gzi-gzi',
+	drum: 'boum-bpum'
+}
+
+if(process.argv.length != 3 || !(process.argv[2] in instrumentSound)){
+	console.log(process.argv[0] + " " + process.argv[1] + " " + process.argv[2]);
+	console.log("Invalid arguments");
+	process.exit(1);
+}
 
 // Retrieve instrument passed in argument
 const instrument = process.argv[2];
 
 // Retrieve sound of the instrument from the map
-const musicianSound = instrumentSound.get(instrument) || null;
+const musicianSound = instrumentSound[instrument] || null;
 
 // Check if the instrument and the sound exists in the map
 if(musicianSound == null){
@@ -34,12 +40,13 @@ const musician_uuid = uuidv4()
 console.log('UUID : ' + musician_uuid);
 
 // Play sound every second
-setInterval(() => play(musician_uuid, musicianSound), 1000)
+setInterval(() => play(musician_uuid, instrument, musicianSound), 1000)
 
-function play(musician_uuid, musicianSound){
+function play(musician_uuid, instrument, musicianSound){
    const data = {
-      uuid: musician_uuid,
-      sound: musicianSound
+      uuid : musician_uuid,
+	  instrument : instrument,
+      sound : musicianSound
    }
 
    const message = JSON.stringify(data);

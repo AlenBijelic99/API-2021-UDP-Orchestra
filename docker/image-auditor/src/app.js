@@ -14,15 +14,6 @@ const PROTOCOL = {
 // Map of musicians
 let musicians = new Map()
 
-// Map of instruments and their sound
-const instrumentSound = new Map([
-   ['piano', 'ti-ta-ti'],
-   ['trumpet', 'pouet'],
-   ['flute', 'trulu'],
-   ['violin', 'gzi-gzi'],
-   ['drum', 'boum-boum'],
-]);
-
 // Bind the UDP server
 udp_socket.bind(PROTOCOL.PORT, function() {
    console.log("Joining multicast group");
@@ -31,34 +22,60 @@ udp_socket.bind(PROTOCOL.PORT, function() {
 
  // Add musician data to musicians map
  udp_socket.on('message', function(msg, source) {
+	const parsedMessage = JSON.parse(msg.toString());
+	
+	const lastEmitted = moment().toISOString()
+	const activeSince = musicians.has(parsedMessage.uuid) ? musicians.get(parsedMessage.uuid).activeSince : lastEmitted
+	
 	console.log("Data has arrived: " + msg + ". Source port: " + source.port);
-   const parsedMessage = JSON.parse(msg.toString());
-   musicians.set(parsedMessage.uuid, {instrument: instrumentSound.get(parsedMessage.instrumentSound), send: moment()});
+   
+   musicians.set(parsedMessage.uuid, {instrument: parsedMessage.instrument, activeSince : activeSince, lastActive : lastEmitted});
 });
-
-// Listening on server
-udp_socket.on('listening', () => {
-   console.log(`client listening ${client.address().address}:${client.address().port}`)
- })
 
  // Check if musician is still active
 setInterval(removeInactiveMusicians, 1000);
 
 // Remove all musicians that have not send anything since 5 seconds
 function removeInactiveMusicians (){
-   for(let [key, value] of musicians.entries()){
-      if(value.send < moment().substract(5, 'seconds')){
-         musicians.delete(key);
-      }
-   }
+   musicians.forEach((value, key) => {
+		
+			if(moment().diff(value.lastActive, 's') > 5){
+				musicians.delete(key)
+			}
+		
+		})
 }
 
-// TCP server
-const server = net.createServer(socket => {
-   const data = []
-   musicians.forEach((value, key) => data.push({ uuid: key, instrument: value.instrumentSound, send: value.send }))
-   socket.write(Buffer.from(JSON.stringify(data)))
-   socket.destroy()
- })
- 
- server.listen(PROTOCOL.TCP_INTERFACE_PORT, PROTOCOL.TCP_INTERFACE_ADDR)
+	function sendTCPResponse(socket){
+		removeInactiveMusicians();
+		
+		var output = [];
+		
+		musicians.forEach((value, key) => {
+			output.push({
+				uuid: key,
+				instrument: value.instrument,
+				lastActive: value.lastActive
+			})
+		})
+		
+		socket.write(JSON.stringify(output))
+		socket.end()
+	}
+
+/* TCP server */
+tcp_server = net.Server();
+
+// The server listens to a socket for a client to make a connection request.
+tcp_server.listen(PROTOCOL.TCP_INTERFACE_PORT, function() {
+    console.log("Listening for connection on " + PROTOCOL.TCP_INTERFACE_PORT + ".");
+});
+
+//when a client connects via TCP
+tcp_server.on('connection', function(socket){
+    sendTCPResponse(socket)
+
+    socket.on('error', function(err) {
+        console.log(`Error: ${err}`);
+    });
+})
