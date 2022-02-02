@@ -110,13 +110,13 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 |Question | How can we represent the system in an **architecture diagram**, which gives information both about the Docker containers, the communication protocols and the commands? |
 | | *Insert your diagram here...* |
 |Question | Who is going to **send UDP datagrams** and **when**? |
-| | *Enter your response here...* |
+| | The musicians send a UDP datagrams every second. |
 |Question | Who is going to **listen for UDP datagrams** and what should happen when a datagram is received? |
-| | *Enter your response here...* |
+| | The auditor is listening to UDP datagrams and monitoring if a musician is still active. It will update datas. |
 |Question | What **payload** should we put in the UDP datagrams? |
-| | *Enter your response here...* |
+| | The id of the musician and the sound played |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | *Enter your response here...* |
+| | We will use key-value to store musicians and another one to store sounds. |
 
 
 ## Task 2: implement a "musician" Node.js application
@@ -124,21 +124,21 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #  | Topic |
 | ---  | --- |
 |Question | In a JavaScript program, if we have an object, how can we **serialize it in JSON**? |
-| | *Enter your response here...*  |
+| | We have the methode JSON.stringify() that converts an object to JSON string.  |
 |Question | What is **npm**?  |
-| | *Enter your response here...*  |
+| | It is a package manager and enables use to install, update uninstall packages that we will use in our programm.  |
 |Question | What is the `npm install` command and what is the purpose of the `--save` flag?  |
-| | *Enter your response here...*  |
+| | Enables us to install a package. --save enables us to list the package in package.json and then when we share our programm, a simple npm install commande will install all dependencies.   |
 |Question | How can we use the `https://www.npmjs.com/` web site?  |
-| | *Enter your response here...*  |
+| | We can search for packages that are enable to install with the npm install command  |
 |Question | In JavaScript, how can we **generate a UUID** compliant with RFC4122? |
-| | *Enter your response here...*  |
+| | The module uuid can be installed with npm and enables us to generate UUIDs.  |
 |Question | In Node.js, how can we execute a function on a **periodic** basis? |
-| | *Enter your response here...*  |
+| | The function setInterval() allows us to do this. We can set a time in ms and use callbacks to execute functions.  |
 |Question | In Node.js, how can we **emit UDP datagrams**? |
-| | *Enter your response here...*  |
+| | We have a dgram module which can be used to create a UDP server socket.  |
 |Question | In Node.js, how can we **access the command line arguments**? |
-| | *Enter your response here...*  |
+| | With the process.argv array  |
 
 
 ## Task 3: package the "musician" app in a Docker image
