@@ -170,7 +170,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
 | | Install the Moment.js package and read the documentation. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | If after 5 seconds since the last datagram received there is no new datagram sent, we can get rid of this musician. |
+| | If after 5 seconds since the last datagram received by a musician there is no new datagram sent, we can get rid of this musician. We do this by removing him from the musicians Map. |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
 | | We can use the net module which enables us to create a simple TCP server. Add the end of the JS file, we need to set the listening IP address and port. |
 
