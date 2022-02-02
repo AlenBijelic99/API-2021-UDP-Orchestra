@@ -146,17 +146,17 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *By running the command `docker build -t <name_image> . ` in the same folder as the `Dockerfile`*  |
+| | By running the command `docker build -t api/musician . ` in the same folder as the `Dockerfile`  |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *`ENTRYPOINT ["node","/opt/app/app.js"]*  |
+| | ENTRYPOINT ["node","/opt/app/app.js"]  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *By using the command `docker run <name_image>`*  |
+| | By using the command `docker run -it api/musician <instrument>`  |
 |Question | How do we get the list of all **running containers**?  |
-| | *By using the command `docker ps`*  |
+| | By using the command `docker ps`  |
 |Question | How do we **stop/kill** one running container?  |
-| | *By using the command `docker kill <name_container>*  |
+| | By using the command `docker kill <name_container>  |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *We can check the logs of the container using Docker Desktop*  |
+| | We can check the logs of the container using Docker Desktop  |
 
 
 ## Task 4: implement an "auditor" Node.js application
@@ -164,15 +164,15 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #  | Topic |
 | ---  | ---  |
 |Question | With Node.js, how can we listen for UDP datagrams in a multicast group? |
-| | *Enter your response here...*  |
+| | Use binding as we saw in socket chapter. It is important to use a multicast IP address.  |
 |Question | How can we use the `Map` built-in object introduced in ECMAScript 6 to implement a **dictionary**?  |
-| | *Enter your response here...* |
+| | We create a constant and store a sort of array that contains multiple key-values defined as a dictionnary. |
 |Question | How can we use the `Moment.js` npm module to help us with **date manipulations** and formatting?  |
-| | *Enter your response here...* |
+| | Install the Moment.js package and read the documentation. |
 |Question | When and how do we **get rid of inactive players**?  |
-| | *Enter your response here...* |
+| | If after 5 seconds since the last datagram received there is no new datagram sent, we can get rid of this musician. |
 |Question | How do I implement a **simple TCP server** in Node.js?  |
-| | *Enter your response here...* |
+| | We can use the net module which enables us to create a simple TCP server. Add the end of the JS file, we need to set the listening IP address and port. |
 
 
 ## Task 5: package the "auditor" app in a Docker image
@@ -180,7 +180,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #  | Topic |
 | ---  | --- |
 |Question | How do we validate that the whole system works, once we have built our Docker image? |
-| | *Enter your response here...* |
+| | There is the valide.js script which will launch an auditor container and test our applications.  |
 
 
 ## Constraints
