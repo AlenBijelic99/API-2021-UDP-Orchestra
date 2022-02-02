@@ -116,7 +116,7 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 |Question | What **payload** should we put in the UDP datagrams? |
 | | The id of the musician and the sound played |
 |Question | What **data structures** do we need in the UDP sender and receiver? When will we update these data structures? When will we query these data structures? |
-| | We will use key-value to store musicians and another one to store sounds. |
+| | We will use a map to store instruments with their sound. |
 
 
 ## Task 2: implement a "musician" Node.js application
