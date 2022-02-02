@@ -146,17 +146,17 @@ Reminder: answer the following questions [here](https://forms.gle/6SM7cu4cYhNsRv
 | #  | Topic |
 | ---  | --- |
 |Question | How do we **define and build our own Docker image**?|
-| | *Enter your response here...*  |
+| | *By running the command `docker build -t <name_image> . ` in the same folder as the `Dockerfile`*  |
 |Question | How can we use the `ENTRYPOINT` statement in our Dockerfile?  |
-| | *Enter your response here...*  |
+| | *`ENTRYPOINT ["node","/opt/app/app.js"]*  |
 |Question | After building our Docker image, how do we use it to **run containers**?  |
-| | *Enter your response here...*  |
+| | *By using the command `docker run <name_image>`*  |
 |Question | How do we get the list of all **running containers**?  |
-| | *Enter your response here...*  |
+| | *By using the command `docker ps`*  |
 |Question | How do we **stop/kill** one running container?  |
-| | *Enter your response here...*  |
+| | *By using the command `docker kill <name_container>*  |
 |Question | How can we check that our running containers are effectively sending UDP datagrams?  |
-| | *Enter your response here...*  |
+| | *We can check the logs of the container using Docker Desktop*  |
 
 
 ## Task 4: implement an "auditor" Node.js application
